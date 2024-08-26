@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .con
+        {
+            width: 80%;
+            height: 30vh;
+            background-color: rgb(192, 240, 245);
+            border-radius: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-wrap: wrap;
+            visibility: hidden;
+        }
+        body{
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        input{
+            width: 500px;
+            height: 5vh;
+            border: 2px solid black;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 20px;
+        }
+        button
+        {
+            width: 200px;
+            height: 5vh;
+            background-color: aqua;
+            border-radius: 10px
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <input type="text" placeholder="Enter your city Name">
+    <button onclick=fun()>Submit</button>
+    <h2></h2>
+    <div class="con">
+        <h3></h3>
+        <h3></h3>
+        <h3></h3>
+        <h3></h3>
+        <h3></h3>
+        <h3></h3>
+        
+    </div>
+    <script>
+        let con=document.getElementsByTagName("div")[0]
+     
+        
+    let i=document.getElementsByTagName("input")[0];
+    let h1=document.getElementsByTagName("h3")[0];
+    let h2=document.getElementsByTagName("h3")[1];
+    let h3=document.getElementsByTagName("h3")[2];
+    let h5=document.getElementsByTagName("h3")[3];
+    let h6=document.getElementsByTagName("h3")[4];
+    let h7=document.getElementsByTagName("h3")[5];
+    let b=document.getElementsByTagName("h2")[0]
+    function fun()
+    {
+        let city=i.value;
+        let res=fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=eedd52cc943dd9174f2c65178d154bdd`).then((res)=>res.json()).then((el)=>{
+            console.log(el.main.temp_min);
+            console.log(el);
+            b.innerHTML=el.name
+            con.style.visibility="visible";
+
+            h1.innerHTML=`Minimum : ${el.main.temp_min} °C`
+            h2.innerHTML=`Temperature : ${el.main.temp} °C`
+            h3.innerHTML=`Pressure : ${el.main.pressure}`
+            h5.innerHTML=`Maximum : ${el.main.temp_max}  °C`
+            h6.innerHTML=`Humidity : ${el.main.humidity}  °C`
+            h7.innerHTML=`Feels Like: ${el.main.feels_like}  °C`
+
+            
+
+            
+        });
+    }
+    
+    
+
+
+    </script>  
+</body>
+</html>
